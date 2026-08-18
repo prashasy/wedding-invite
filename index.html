@@ -194,8 +194,9 @@ body.st-2 .stage{opacity:0;transform:scale(1.14)}
   z-index:2;pointer-events:none;
 }
 .fig img{height:100%;width:auto}
-.fig--bride{left:-6%;--h:var(--ch-b);transform:translateY(60%) rotate(-8deg)}
-.fig--groom{right:-6%;--h:var(--ch-g);transform:translateY(60%) rotate(8deg)}
+.fig--bride{left:0;--h:var(--ch-b);transform:translateY(60%) rotate(-8deg)}
+.fig--groom{right:0;--h:var(--ch-g);transform:translateY(60%) rotate(8deg)}
+@media(min-width:860px){.fig{height:calc(min(350px,46vh) * var(--h))}}
 body.st-in .fig{opacity:1}
 body.st-in .fig--bride{transform:translateY(0) rotate(-2deg);animation:bobA 5s ease-in-out 1.1s infinite}
 body.st-in .fig--groom{transform:translateY(0) rotate(2deg);animation:bobB 5.6s ease-in-out 1.3s infinite}
@@ -207,7 +208,7 @@ body.st-1 .fig--groom{animation:jumpB .7s var(--pop)}
 @keyframes jumpA{0%{transform:translateY(0) rotate(-2deg)}45%{transform:translateY(-34px) rotate(-11deg)}100%{transform:translateY(0) rotate(-2deg)}}
 @keyframes jumpB{0%{transform:translateY(0) rotate(2deg)}45%{transform:translateY(-38px) rotate(11deg)}100%{transform:translateY(0) rotate(2deg)}}
 
-.sealwrap{margin-top:clamp(26px,7vw,40px);position:relative;display:inline-block}
+.sealwrap{margin:clamp(26px,7vw,40px) auto 0;position:relative;display:block;width:fit-content}
 .seal{
   position:relative;width:clamp(102px,26vw,120px);height:clamp(102px,26vw,120px);
   border-radius:50%;border:0;padding:0;display:grid;place-items:center;
@@ -571,12 +572,21 @@ main{position:relative;z-index:2}
 .switcher{display:none}
 body.is-preview .switcher{display:inline}
 
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
-  .reveal,.cue__fig,.cue__bubble,.pic,.cue__bubble .bw{opacity:1!important;transform:none!important}
-  .shimmer{display:none}
-  .timeline.is-in::before{height:calc(100% - 12px)}
-}
+/* Reduced motion is applied as a class, not a bare media query, so the reader
+   can still choose to play the animations (see .motionfix on the cover). */
+body.no-motion *,body.no-motion *::before,body.no-motion *::after{
+  animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+body.no-motion .reveal,body.no-motion .cue__fig,body.no-motion .cue__bubble,
+body.no-motion .pic,body.no-motion .cue__bubble .bw{opacity:1!important;transform:none!important}
+body.no-motion .shimmer{display:none}
+body.no-motion .timeline.is-in::before{height:calc(100% - 12px)}
+
+.motionfix{display:block;margin:15px auto 0;padding:0;background:none;border:0;
+  font-family:var(--f-body);font-size:12.5px;font-weight:300;line-height:1.55;
+  color:var(--mute-dark);max-width:290px;text-align:center;cursor:pointer}
+.motionfix b{color:var(--gold-soft);font-weight:400;
+  border-bottom:1px solid rgba(235,212,159,.45);padding-bottom:1px}
+.motionfix[hidden]{display:none}
 </style>
 </head>
 
@@ -623,6 +633,8 @@ body.is-preview .switcher{display:inline}
         <button class="seal" id="sealBtn" aria-label="Open the invitation"></button>
       </div>
       <p class="tap">Tap the seal to open</p>
+      <button class="motionfix" id="motionFix" hidden>This page animates.
+        <b>Switch to the calm version</b></button>
     </div>
   </div>
 
@@ -893,7 +905,12 @@ if (HOST !== "groom" && HOST !== "bride") HOST = CONFIG.defaultHost;
 var SIDE = CONFIG.sides[HOST];
 var OTHER = HOST === "groom" ? "bride" : "groom";
 var GUEST = (q.get("to") || "").trim();
-var REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+/* Animations play for everyone by default, whatever the device setting says.
+   ?motion=reduce is the one way to get the calm version. */
+var MOTION = (q.get("motion") || "").toLowerCase();
+var DEVICE_CALM = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var REDUCED = MOTION === "reduce";
+document.body.classList.toggle("no-motion", REDUCED);
 
 /* which events is this guest invited to? */
 var EVQ = (q.get("ev") || "").toLowerCase().replace(/[^a-z]/g, "");
@@ -1102,6 +1119,16 @@ body.classList.add("is-locked");
   $("#strands").innerHTML = h;
 })();
 setTimeout(function(){ body.classList.add("st-in"); }, 260);
+
+if (DEVICE_CALM && !REDUCED){
+  var mf = $("#motionFix");
+  mf.hidden = false;
+  mf.addEventListener("click", function(e){
+    e.stopPropagation();
+    q.set("motion", "reduce");
+    location.search = q.toString();
+  });
+}
 
 var timers = [], opened = false;
 function openInvite(){
