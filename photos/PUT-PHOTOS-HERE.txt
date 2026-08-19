@@ -1,0 +1,25 @@
+PHOTOS GO IN THIS FOLDER
+========================
+
+The invitation looks for these exact filenames. Anything missing simply shows an
+elegant empty frame with the caption, so nothing breaks while you collect them.
+
+  us-01.jpg    "The first meeting"
+  us-02.jpg    "Roka"
+  us-03.jpg    "Both families"
+  us-04.jpg    "That evening out"
+  us-05.jpg    "Ring shopping"
+  us-06.jpg    "Us"
+
+  og-cover.jpg  The thumbnail WhatsApp shows when someone forwards the link.
+                1200 x 630 px works best. This one really matters -- it is the
+                first thing every guest sees, before they even open the page.
+
+NOTES
+  - Square crops look best in the hanging frames (they are displayed 1:1).
+  - Keep each file under ~400 KB so the page stays quick on mobile data.
+  - To change the captions, or to add/remove photos, edit CONFIG.gallery near
+    the top of the <script> block in invitation.html.
+  - Filenames are case sensitive on most web hosts. us-01.jpg is not Us-01.JPG.
+
+Delete this file once your photos are in.

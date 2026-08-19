@@ -13,7 +13,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Prata&family=Italiana&family=Jost:wght@200;300;400;500&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Cinzel:wght@400;500;600&family=Jost:wght@200;300;400;500&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
 
 <style>
 /* ============================================================
@@ -25,6 +25,7 @@
   --parchment:#F7EFE3;
   --parchment-2:#EEE2CF;
   --gold:#B98A32;
+  --gold-deep:#8A6220;   /* small gold labels on the parchment sections */
   --gold-soft:#EBD49F;
   --accent:#65101F;
   --accent-2:#8E1F33;
@@ -36,7 +37,7 @@
   --rule-light:rgba(36,20,22,.20);
 
   --f-display:'Prata',Georgia,serif;
-  --f-label:'Italiana',Georgia,serif;
+  --f-label:'Cinzel',Georgia,serif;
   --f-body:'Jost',system-ui,sans-serif;
   --f-deva:'Tiro Devanagari Hindi',serif;
 
@@ -46,8 +47,8 @@
   --pop:cubic-bezier(.34,1.56,.64,1);
 
   /* character heights — bride sits just under the groom, as in the artwork */
-  --ch-g:1;
-  --ch-b:.94;
+  --ch-g:1.2;
+  --ch-b:.90;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -66,8 +67,8 @@ a{color:inherit}
    2. TYPE
    ============================================================ */
 .label{
-  font-family:var(--f-label);font-size:clamp(11px,2.8vw,13px);
-  letter-spacing:.42em;text-transform:uppercase;
+  font-family:var(--f-label);font-weight:600;font-size:clamp(12px,3vw,14px);
+  letter-spacing:.2em;text-transform:uppercase;
   color:var(--gold-soft);margin:0 0 clamp(14px,3vw,22px);
 }
 .chapter--light .label{color:var(--accent)}
@@ -181,8 +182,8 @@ body.st-2 .stage{opacity:0;transform:scale(1.14)}
 .board::before{left:16%}
 .board::after{right:16%}
 .board__greet{font-family:var(--f-display);font-size:clamp(24px,6.6vw,38px);line-height:1.18;margin:0;color:var(--on-dark)}
-.board__greet span{display:block;font-family:var(--f-label);font-size:clamp(11px,2.9vw,13px);
-  letter-spacing:.4em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:10px}
+.board__greet span{display:block;font-family:var(--f-label);font-weight:600;font-size:clamp(11px,2.9vw,13px);
+  letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:10px}
 .board__note{font-size:clamp(13px,3.4vw,15px);color:var(--mute-dark);margin:12px 0 0}
 
 /* figurines — sized by HEIGHT so the two stay in proportion */
@@ -211,7 +212,7 @@ body.st-1 .fig--groom{animation:jumpB .7s var(--pop)}
 .sealwrap{margin:clamp(26px,7vw,40px) auto 0;position:relative;display:block;width:fit-content}
 .seal{
   position:relative;width:clamp(102px,26vw,120px);height:clamp(102px,26vw,120px);
-  border-radius:50%;border:0;padding:0;display:grid;place-items:center;
+  border-radius:50%;border:0;padding:0;display:grid;place-items:center;place-content:center;
   background:radial-gradient(70% 70% at 34% 28%,#A02138 0%,#6E1327 48%,#43081A 100%);
   box-shadow:0 14px 40px rgba(0,0,0,.55),inset 0 2px 6px rgba(255,255,255,.16);
   font-family:var(--f-display);font-size:clamp(16px,4.2vw,19px);color:#F6E2B4;
@@ -245,7 +246,7 @@ body.st-1 .seal{animation:sealpop .8s var(--ease) forwards}
 body.st-1 .halo{opacity:0}
 
 .tap{
-  font-family:var(--f-label);font-size:clamp(11px,3vw,13px);letter-spacing:.4em;
+  font-family:var(--f-label);font-weight:600;font-size:clamp(11px,3vw,13px);letter-spacing:.2em;
   text-transform:uppercase;color:var(--gold-soft);margin:clamp(16px,4vw,22px) 0 0;
   animation:breathe 2.6s ease-in-out infinite;
 }
@@ -274,7 +275,7 @@ body.st-3 .envstage,body.st-4 .envstage{opacity:1}
   padding:clamp(20px,6vw,30px) 16px 0;
 }
 body.st-4 .env__card{transform:translateY(-56%)}
-.env__card p{margin:0;font-family:var(--f-label);font-size:12px;letter-spacing:.36em;
+.env__card p{margin:0;font-family:var(--f-label);font-weight:600;font-size:12px;letter-spacing:.2em;
   text-transform:uppercase;color:var(--accent);opacity:0;transition:opacity .5s ease .5s}
 body.st-4 .env__card p{opacity:1}
 .env__card h4{margin:2px 0 0;font-family:var(--f-display);font-size:clamp(19px,5vw,25px);
@@ -326,7 +327,7 @@ main{position:relative;z-index:2}
 .reveal[data-d="6"]{transition-delay:.54s}
 
 .scroll-cue{display:flex;flex-direction:column;align-items:center;gap:9px;
-  font-family:var(--f-label);font-size:12px;letter-spacing:.4em;text-transform:uppercase;
+  font-family:var(--f-label);font-weight:600;font-size:12px;letter-spacing:.2em;text-transform:uppercase;
   color:var(--gold);margin-top:clamp(40px,9vw,64px)}
 .scroll-cue svg{width:15px;height:15px;stroke:var(--gold);fill:none;stroke-width:1.4;animation:nudge 2s ease-in-out infinite}
 @keyframes nudge{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(6px);opacity:1}}
@@ -378,12 +379,12 @@ main{position:relative;z-index:2}
 .names{margin:clamp(28px,6.5vw,42px) 0}
 .names__name{font-family:var(--f-display);font-size:clamp(36px,9.8vw,66px);
   line-height:1.06;margin:0;color:var(--accent)}
-.names__rel{font-family:var(--f-label);font-size:clamp(12px,3vw,14px);letter-spacing:.34em;
-  text-transform:uppercase;color:var(--gold);margin:0 0 8px}
+.names__rel{font-family:var(--f-label);font-weight:600;font-size:clamp(12.5px,3.1vw,14.5px);letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold-deep);margin:0 0 8px}
 .names__lineage{font-size:clamp(14.5px,3.7vw,16.5px);font-weight:400;line-height:1.8;color:var(--mute-light);margin:12px 0 0}
 .names__amp{font-family:var(--f-display);font-style:italic;
   font-size:clamp(38px,10vw,62px);color:var(--gold);margin:clamp(14px,3.5vw,22px) 0;line-height:1}
-.badge{display:inline-block;font-family:var(--f-label);font-size:12px;letter-spacing:.34em;
+.badge{display:inline-block;font-family:var(--f-label);font-weight:600;font-size:12px;letter-spacing:.2em;
   text-transform:uppercase;color:var(--accent);border:1px solid var(--rule-light);
   border-radius:999px;padding:8px 17px;margin-bottom:24px}
 
@@ -392,7 +393,7 @@ main{position:relative;z-index:2}
   display:inline-block;margin:clamp(8px,2vw,14px) auto 0;padding:clamp(18px,4.5vw,26px) clamp(24px,6vw,40px);
   border:1px solid var(--accent);border-radius:3px;background:rgba(101,16,31,.05);
 }
-.dateline__day{font-family:var(--f-label);font-size:clamp(12px,3.2vw,14px);letter-spacing:.4em;
+.dateline__day{font-family:var(--f-label);font-weight:600;font-size:clamp(12px,3.2vw,14px);letter-spacing:.2em;
   text-transform:uppercase;color:var(--accent-2);margin:0 0 8px}
 .dateline__date{font-family:var(--f-display);font-size:clamp(27px,7.2vw,42px);line-height:1.12;
   color:var(--accent);margin:0}
@@ -423,7 +424,7 @@ main{position:relative;z-index:2}
   border-radius:50%;background:var(--gold-soft);box-shadow:0 0 8px rgba(231,206,150,.6)}
 .pic img{width:100%;aspect-ratio:1/1;object-fit:cover;background:var(--parchment-2)}
 .pic__cap{position:absolute;left:0;right:0;bottom:13px;
-  font-family:var(--f-label);font-size:12px;letter-spacing:.28em;
+  font-family:var(--f-label);font-weight:600;font-size:12px;letter-spacing:.2em;
   text-transform:uppercase;color:var(--accent)}
 .pic.no-img img{display:none}
 .pic.no-img .ph{display:grid}
@@ -432,7 +433,7 @@ main{position:relative;z-index:2}
   font-size:12px;letter-spacing:.08em;text-align:center;padding:16px}
 .ph svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.2;opacity:.6}
 .hang__hint{text-align:center;font-size:12px;letter-spacing:.2em;text-transform:uppercase;
-  font-family:var(--f-label);color:var(--mute-dark);margin:6px 0 0}
+  font-family:var(--f-label);font-weight:600;color:var(--mute-dark);margin:6px 0 0}
 @media(min-width:860px){.hang__hint{display:none}}
 
 .lbx{position:fixed;inset:0;z-index:70;background:rgba(10,5,7,.95);
@@ -441,7 +442,7 @@ main{position:relative;z-index:2}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 .lbx img{max-width:min(92vw,720px);max-height:76vh;object-fit:contain;
   box-shadow:0 30px 80px rgba(0,0,0,.7);border:10px solid var(--parchment)}
-.lbx__cap{color:var(--gold-soft);font-family:var(--f-label);letter-spacing:.3em;
+.lbx__cap{color:var(--gold-soft);font-family:var(--f-label);font-weight:600;letter-spacing:.2em;
   text-transform:uppercase;font-size:13px;margin-top:18px;text-align:center}
 .lbx__x{position:absolute;top:18px;right:18px;width:44px;height:44px;border-radius:50%;
   border:1px solid var(--rule-dark);background:rgba(21,10,14,.85);display:grid;place-items:center}
@@ -457,22 +458,22 @@ main{position:relative;z-index:2}
 .scratch__under{position:absolute;inset:0;display:grid;place-content:center;text-align:center;gap:6px;padding:18px;
   transform:scale(.94);opacity:.4;transition:transform .8s var(--pop),opacity .8s ease}
 .scratch.is-done .scratch__under{transform:none;opacity:1}
-.scratch__day{font-family:var(--f-label);font-size:clamp(12px,3.2vw,14px);letter-spacing:.44em;text-transform:uppercase;color:var(--gold-soft)}
+.scratch__day{font-family:var(--f-label);font-weight:600;font-size:clamp(12px,3.2vw,14px);letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft)}
 .scratch__date{font-family:var(--f-display);font-size:clamp(46px,13vw,74px);line-height:1;color:var(--on-dark);margin:4px 0}
-.scratch__month{font-family:var(--f-label);font-size:clamp(15px,4.2vw,20px);letter-spacing:.34em;text-transform:uppercase;color:var(--gold-soft)}
+.scratch__month{font-family:var(--f-label);font-weight:600;font-size:clamp(15px,4.2vw,20px);letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft)}
 .scratch canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;transition:opacity .6s ease}
 .scratch.is-done canvas{opacity:0;pointer-events:none}
 
 .count{display:flex;justify-content:center;gap:clamp(14px,4.5vw,30px);margin-top:clamp(30px,7vw,44px);flex-wrap:wrap}
 .count__cell{min-width:58px}
 .count__n{font-family:var(--f-display);font-size:clamp(27px,7vw,40px);line-height:1;color:var(--gold-soft);font-variant-numeric:tabular-nums}
-.count__l{font-family:var(--f-label);font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--mute-dark);margin-top:8px}
+.count__l{font-family:var(--f-label);font-weight:600;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute-dark);margin-top:8px}
 
 /* ============================================================
    10. SCHEDULE
    ============================================================ */
-.host-tag{display:inline-flex;align-items:center;gap:9px;font-family:var(--f-label);
-  font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-soft);
+.host-tag{display:inline-flex;align-items:center;gap:9px;font-family:var(--f-label);font-weight:600;
+  font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft);
   border:1px solid var(--rule-dark);border-radius:999px;padding:8px 16px;margin-bottom:20px}
 .host-tag i{width:5px;height:5px;border-radius:50%;background:var(--accent-2);font-style:normal}
 
@@ -512,11 +513,11 @@ main{position:relative;z-index:2}
   transition:transform .5s var(--ease),box-shadow .5s ease}
 .venue:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(36,20,22,.14)}
 .venue + .venue{margin-top:16px}
-.venue__tag{font-family:var(--f-label);font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+.venue__tag{font-family:var(--f-label);font-weight:600;font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep);margin:0 0 10px}
 .venue__name{font-family:var(--f-display);font-size:clamp(25px,6.2vw,34px);margin:0;color:var(--accent)}
 .venue__addr{font-size:clamp(15.5px,4vw,17.5px);font-weight:400;line-height:1.8;color:var(--on-light);margin:12px 0 0}
 .venue__which{font-size:15px;color:var(--mute-light);margin:16px 0 0;display:flex;flex-wrap:wrap;gap:10px;align-items:baseline}
-.venue__which span{font-family:var(--f-label);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--accent)}
+.venue__which span{font-family:var(--f-label);font-weight:600;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
 .venue__note{font-size:14px;line-height:1.65;color:var(--mute-light);margin:12px 0 0;font-style:italic}
 .venue .btn{margin-top:24px}
 
@@ -525,7 +526,7 @@ main{position:relative;z-index:2}
    ============================================================ */
 .form{display:grid;gap:14px;max-width:520px;margin:clamp(30px,7vw,44px) auto 0;text-align:left}
 .field{display:grid;gap:7px}
-.field > span{font-family:var(--f-label);font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-soft)}
+.field > span{font-family:var(--f-label);font-weight:600;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft)}
 .input,.area{width:100%;font-family:var(--f-body);font-size:16px;font-weight:300;
   padding:14px 16px;border-radius:2px;color:var(--on-light);
   background:rgba(255,255,255,.72);border:1px solid var(--rule-light);
@@ -535,7 +536,7 @@ main{position:relative;z-index:2}
 .input::placeholder,.area::placeholder{color:rgba(36,20,22,.45)}
 
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:11px;
-  font-family:var(--f-label);font-size:14px;letter-spacing:.3em;text-transform:uppercase;
+  font-family:var(--f-label);font-weight:600;font-size:14px;letter-spacing:.2em;text-transform:uppercase;
   padding:16px 30px;border:1px solid var(--accent);background:var(--accent);color:#F9F0DF;
   border-radius:2px;text-decoration:none;transition:background .35s,transform .25s var(--ease),box-shadow .35s}
 .btn:hover{background:var(--accent-2);transform:translateY(-2px);box-shadow:0 12px 28px rgba(101,16,31,.3)}
@@ -549,7 +550,7 @@ main{position:relative;z-index:2}
 .wish{border:1px solid var(--rule-dark);padding:20px 22px;background:rgba(255,255,255,.04);animation:pop .55s var(--pop) both}
 @keyframes pop{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
 .wish__msg{font-family:var(--f-display);font-size:17px;line-height:1.6;margin:0;color:var(--on-dark)}
-.wish__by{font-family:var(--f-label);font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-soft);margin:14px 0 0}
+.wish__by{font-family:var(--f-label);font-weight:600;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft);margin:14px 0 0}
 .wall__empty{text-align:center;color:var(--mute-dark);font-size:15px;grid-column:1/-1;padding:24px 0}
 
 /* ============================================================
@@ -561,19 +562,19 @@ main{position:relative;z-index:2}
 .footer__pair img{width:auto;filter:drop-shadow(0 14px 22px rgba(0,0,0,.5))}
 .footer__pair img:first-child{height:calc(clamp(130px,30vw,190px) * var(--ch-b));animation:bobA 5s ease-in-out infinite}
 .footer__pair img:last-child{height:calc(clamp(130px,30vw,190px) * var(--ch-g));animation:bobB 5.6s ease-in-out .4s infinite}
-.footer__seal{width:88px;height:88px;border-radius:50%;margin:0 auto 24px;display:grid;place-items:center;
+.footer__seal{width:88px;height:88px;border-radius:50%;margin:0 auto 24px;display:grid;place-items:center;place-content:center;
   background:radial-gradient(70% 70% at 34% 28%,var(--accent-2),var(--accent) 55%,#3E0A18 100%);
   font-family:var(--f-display);font-size:16px;color:#F6E2B4;
   box-shadow:0 12px 34px rgba(0,0,0,.5),inset 0 2px 5px rgba(255,255,255,.15)}
 .footer__line{font-family:var(--f-display);font-size:clamp(20px,5.4vw,28px);margin:0;line-height:1.4}
 .footer__fam{font-size:15px;color:var(--mute-dark);margin:16px 0 0;line-height:1.8}
-.footer__meta{font-family:var(--f-label);font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:rgba(246,237,221,.38);margin-top:clamp(34px,7vw,48px)}
+.footer__meta{font-family:var(--f-label);font-weight:600;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(246,237,221,.38);margin-top:clamp(34px,7vw,48px)}
 .footer__meta a{color:var(--gold-soft);text-decoration:none;border-bottom:1px solid var(--rule-dark)}
 .switcher{display:none}
 body.is-preview .switcher{display:inline}
 
 /* Reduced motion is applied as a class, not a bare media query, so the reader
-   can still choose to play the animations (see .motionfix on the cover). */
+   can still choose to play the animations (?motion=reduce). */
 body.no-motion *,body.no-motion *::before,body.no-motion *::after{
   animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
 body.no-motion .reveal,body.no-motion .cue__fig,body.no-motion .cue__bubble,
@@ -581,12 +582,6 @@ body.no-motion .pic,body.no-motion .cue__bubble .bw{opacity:1!important;transfor
 body.no-motion .shimmer{display:none}
 body.no-motion .timeline.is-in::before{height:calc(100% - 12px)}
 
-.motionfix{display:block;margin:15px auto 0;padding:0;background:none;border:0;
-  font-family:var(--f-body);font-size:12.5px;font-weight:300;line-height:1.55;
-  color:var(--mute-dark);max-width:290px;text-align:center;cursor:pointer}
-.motionfix b{color:var(--gold-soft);font-weight:400;
-  border-bottom:1px solid rgba(235,212,159,.45);padding-bottom:1px}
-.motionfix[hidden]{display:none}
 </style>
 </head>
 
@@ -633,8 +628,6 @@ body.no-motion .timeline.is-in::before{height:calc(100% - 12px)}
         <button class="seal" id="sealBtn" aria-label="Open the invitation"></button>
       </div>
       <p class="tap">Tap the seal to open</p>
-      <button class="motionfix" id="motionFix" hidden>This page animates.
-        <b>Switch to the calm version</b></button>
     </div>
   </div>
 
@@ -691,7 +684,7 @@ body.no-motion .timeline.is-in::before{height:calc(100% - 12px)}
   <!-- 2 -->
   <section class="chapter chapter--dark" data-bead="Us, so far">
     <div class="wrap wrap--wide">
-      <div class="cue" data-char="bride" data-say="Phone ka poora storage inhi tasveeron ne khaya hai."></div>
+      <div class="cue" data-char="bride" data-say="hum to hain hi photogenic 💁‍♀️"></div>
       <div class="center">
         <p class="label reveal">A few of our moments</p>
         <h2 class="title reveal" data-split data-d="1">Us, <em>so far</em></h2>
@@ -706,7 +699,7 @@ body.no-motion .timeline.is-in::before{height:calc(100% - 12px)}
   <!-- 3 -->
   <section class="chapter chapter--dark" data-bead="The date">
     <div class="wrap center">
-      <div class="cue cue--right" data-char="groom" data-say="Zara scratch kijiye. Tareekh andar chhupi hai."></div>
+      <div class="cue cue--right" data-char="groom" data-say="Scratch for the date and block your calendar 😁"></div>
       <p class="label reveal">Save it</p>
       <h2 class="title reveal" data-split data-d="1">The <em>Date</em></h2>
 
@@ -729,7 +722,7 @@ body.no-motion .timeline.is-in::before{height:calc(100% - 12px)}
   <!-- 4 -->
   <section class="chapter chapter--dark" data-bead="The days">
     <div class="wrap">
-      <div class="cue" data-char="bride" data-say="Naach, khana, phir se khana. Timing yahan hai."></div>
+      <div class="cue" data-char="bride" data-say="Har event time par hoga, so don&#39;t get late 😅"></div>
       <div class="center">
         <p class="label reveal">Hour by hour</p>
         <h2 class="title reveal" data-split data-d="1">What to <em>expect</em></h2>
@@ -742,7 +735,7 @@ body.no-motion .timeline.is-in::before{height:calc(100% - 12px)}
   <!-- 5 -->
   <section class="chapter chapter--light" data-bead="The venues">
     <div class="wrap">
-      <div class="cue cue--right" data-char="groom" data-say="Address yahan hai. Poochhte-poochhte mat aaiyega."></div>
+      <div class="cue cue--right" data-char="groom" data-say="Location pin daal diya hai. Fatafat aa jaiye 🏃‍♂️"></div>
       <div class="center">
         <p class="label reveal">Finding us</p>
         <h2 class="title reveal" data-split data-d="1">Where we <em>gather</em></h2>
@@ -754,7 +747,7 @@ body.no-motion .timeline.is-in::before{height:calc(100% - 12px)}
   <!-- 6 -->
   <section class="chapter chapter--dark" data-bead="Send a wish">
     <div class="wrap center">
-      <div class="cue" data-char="bride" data-say="Do line likh dijiye. Sabke saamne padhi jayegi."></div>
+      <div class="cue" data-char="bride" data-say="Dil se likhiye jo hume yaad rahe ❤️"></div>
       <p class="label reveal">Leave us a note</p>
       <h2 class="title reveal" data-split data-d="1">Send a <em>wish</em></h2>
       <p class="sub reveal" data-d="2" id="wishIntro"></p>
@@ -823,7 +816,7 @@ var CONFIG = {
   defaultHost: "groom",
   music: "",                         // e.g. "audio/shehnai.mp3" — "" hides the music button
 
-  inbox: { sheetUrl: "", whatsapp: "919999999999", showWall: true },
+  inbox: { sheetUrl: "https://script.google.com/macros/s/AKfycbwvhw9bM0ZFf8BYoLaBdsAYMbgoqYcZIyu68cEk5sSizUdeOBNXVgNON410HjGCOm6h/exec", whatsapp: "7275697998", showWall: true },
 
   couple: {
     groom: { first:"Prashasy", full:"Prashasy Yadav",
@@ -908,7 +901,6 @@ var GUEST = (q.get("to") || "").trim();
 /* Animations play for everyone by default, whatever the device setting says.
    ?motion=reduce is the one way to get the calm version. */
 var MOTION = (q.get("motion") || "").toLowerCase();
-var DEVICE_CALM = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 var REDUCED = MOTION === "reduce";
 document.body.classList.toggle("no-motion", REDUCED);
 
@@ -1119,16 +1111,6 @@ body.classList.add("is-locked");
   $("#strands").innerHTML = h;
 })();
 setTimeout(function(){ body.classList.add("st-in"); }, 260);
-
-if (DEVICE_CALM && !REDUCED){
-  var mf = $("#motionFix");
-  mf.hidden = false;
-  mf.addEventListener("click", function(e){
-    e.stopPropagation();
-    q.set("motion", "reduce");
-    location.search = q.toString();
-  });
-}
 
 var timers = [], opened = false;
 function openInvite(){

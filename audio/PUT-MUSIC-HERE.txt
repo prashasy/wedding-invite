@@ -1,0 +1,16 @@
+BACKGROUND MUSIC (optional)
+===========================
+
+Drop one audio file here, for example shehnai.mp3, then set this in
+invitation.html:
+
+    music: "audio/shehnai.mp3",
+
+Leave it as "" and the music button is hidden entirely.
+
+NOTES
+  - Keep it under ~2 MB. It only starts after the guest taps the seal, which
+    is what satisfies the browser's autoplay rules.
+  - Guests can mute it any time with the button in the bottom-right corner.
+  - Use something you have the right to use. Film songs on a public link are
+    a copyright risk; instrumental shehnai or sitar is the safe route.

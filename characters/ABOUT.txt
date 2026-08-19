@@ -1,0 +1,32 @@
+THE CARICATURES
+===============
+
+bride.png / groom.png     Full quality, transparent background, cut from the
+                          original artwork with the plinths removed.
+                          Garima 412 x 818, Prashasy 304 x 946.
+
+bride.webp / groom.webp   Compressed versions. These exact two files are the
+                          ones base64-embedded inside invitation.html, which is
+                          why the invitation works as a single file with no
+                          image dependencies.
+
+source-original.png       The untouched artwork both were cut from.
+
+YOU DO NOT NEED THESE FILES FOR THE WEBSITE TO WORK.
+The invitation already carries both characters inside it. This folder is here
+so you can reuse them elsewhere -- WhatsApp stickers, printed cards, the save
+the date, table names, a calendar invite image.
+
+IF YOU EVER REPLACE THEM
+The two <img> sources live in one line near the bottom of invitation.html:
+    var CHARS = { bride: "data:image/webp;base64,...", groom: "..." };
+Swap those data URIs, or point them at files instead:
+    var CHARS = { bride: "characters/bride.webp", groom: "characters/groom.webp" };
+The second form makes the HTML much smaller but adds two network requests.
+
+A WARNING ABOUT SIZING
+Their aspect ratios are very different -- Garima 0.50 wide-to-tall, Prashasy
+0.32. Everywhere in the CSS they are sized by HEIGHT, never width. Sizing them
+by width makes her look far shorter than him (206px vs 323px at the same
+width). The --ch-g and --ch-b tokens at the top of the stylesheet set their
+relative heights: 1 and .94.
