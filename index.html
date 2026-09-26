@@ -375,8 +375,8 @@ main{position:relative;z-index:2}
    ============================================================ */
 .ghosts{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
 .ghosts img{position:absolute;bottom:0;opacity:.07;filter:grayscale(.3)}
-.ghosts img:first-child{left:-5%;height:calc(clamp(210px,44vw,330px) * var(--ch-b));animation:drift 11s ease-in-out infinite}
-.ghosts img:last-child{right:-5%;height:calc(clamp(210px,44vw,330px) * var(--ch-g));animation:drift 13s ease-in-out .8s infinite reverse}
+.ghosts img:first-child{left:-5%;height:calc(clamp(210px,44vw,330px) * var(--ch-g));animation:drift 11s ease-in-out infinite}
+.ghosts img:last-child{right:-5%;height:calc(clamp(210px,44vw,330px) * var(--ch-b));animation:drift 13s ease-in-out .8s infinite reverse}
 @keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
 
 .hostline{font-size:clamp(15px,4vw,17.5px);line-height:1.8;color:var(--on-light);
@@ -565,8 +565,8 @@ main{position:relative;z-index:2}
   padding:clamp(56px,12vw,88px) var(--pad) clamp(40px,9vw,58px)}
 .footer__pair{display:flex;justify-content:center;align-items:flex-end;gap:clamp(6px,2.5vw,22px);margin-bottom:clamp(20px,5vw,30px)}
 .footer__pair img{width:auto;filter:drop-shadow(0 14px 22px rgba(0,0,0,.5))}
-.footer__pair img:first-child{height:calc(clamp(130px,30vw,190px) * var(--ch-b));animation:bobA 5s ease-in-out infinite}
-.footer__pair img:last-child{height:calc(clamp(130px,30vw,190px) * var(--ch-g));animation:bobB 5.6s ease-in-out .4s infinite}
+.footer__pair img:first-child{height:calc(clamp(130px,30vw,190px) * var(--ch-g));animation:bobA 5s ease-in-out infinite}
+.footer__pair img:last-child{height:calc(clamp(130px,30vw,190px) * var(--ch-b));animation:bobB 5.6s ease-in-out .4s infinite}
 .footer__seal{width:88px;height:88px;border-radius:50%;margin:0 auto 24px;display:grid;place-items:center;place-content:center;
   background:radial-gradient(70% 70% at 34% 28%,var(--accent-2),var(--accent) 55%,#3E0A18 100%);
   font-family:var(--f-display);font-size:16px;color:#F6E2B4;
@@ -809,6 +809,11 @@ body.no-motion .timeline.is-in::before{height:calc(100% - 12px)}
    Only the events in ev are shown, and only the addresses those events use.
    Add &preview=1 while testing to see a side switcher and the active filter.
    ========================================================================== */
+/* Shared celebrations — identical for both sides. */
+var ENGAGEMENT = { code:"e", name:"Engagement, Tilak and Godh Bharai",
+  start:"2026-12-05T18:30:00+05:30", at:"ramada" };
+var SHAADI = { code:"s", name:"Shaadi", start:"2026-12-07T19:00:00+05:30", at:"ramada" };
+
 var CONFIG = {
 
   hashtag: "#PrashasyKiGarima",      // ← wax seal + footer. Stacks itself across lines to fit.
@@ -865,12 +870,12 @@ var CONFIG = {
       askLine:"request the pleasure of your company at the wedding of their son",
       relA:"The groom", relB:"The bride",
       events: [
-        { code:"e", name:"Engagement",      start:"2026-12-05T19:00:00+05:30", at:"ramada" },
+        ENGAGEMENT,
         { code:"h", name:"Haldi & Mehendi", start:"2026-12-06T12:00:00+05:30", at:"groomHome" },
         /* ⚠ CONFIRM THIS TIME. Rabindrapalli to Ramada is across the city. */
         { code:"b", name:"Baraat",          start:"2026-12-07T18:00:00+05:30", at:"groomHome",
           note:"Gathers at the house and leaves for Ramada together." },
-        { code:"s", name:"Shaadi",          start:"2026-12-07T20:00:00+05:30", at:"ramada" }
+        SHAADI
       ]
     },
     bride: {
@@ -879,10 +884,11 @@ var CONFIG = {
       askLine:"request the pleasure of your company at the wedding of their daughter",
       relA:"The bride", relB:"The groom",
       events: [
-        { code:"m", name:"Mehendi",    start:"2026-12-04T12:00:00+05:30", at:"brideHome" },
-        { code:"e", name:"Engagement", start:"2026-12-05T19:00:00+05:30", at:"ramada" },
-        { code:"h", name:"Haldi",      start:"2026-12-06T12:00:00+05:30", at:"brideHome" },
-        { code:"s", name:"Shaadi",     start:"2026-12-07T20:00:00+05:30", at:"ramada" }
+        { code:"m", name:"Mehendi",    start:"2026-12-04T17:00:00+05:30", at:"brideHome" },
+        ENGAGEMENT,
+        { code:"h", name:"Haldi and Sangeet", start:"2026-12-06T17:00:00+05:30", at:"brideHome" },
+        SHAADI,
+        { code:"v", name:"Vidai",      start:"2026-12-08T07:00:00+05:30", at:"ramada" }
       ]
     }
   }
@@ -965,7 +971,7 @@ $("#greetName").textContent = GUEST || "Respected Guest";
 $("#addressee").textContent = GUEST ? "For " + GUEST : "For you and your family";
 $("#envNames").textContent = CONFIG.couple.groom.first + " & " + CONFIG.couple.bride.first;
 $("#hostLabelFoot").textContent = SIDE.label;
-$("#footFam").innerHTML = "With love,<br>the Yadav families";
+$("#footFam").innerHTML = "With love,<br>The Yadav Families";
 $("#evDebug").textContent = "events: " + EVENTS.map(function(e){ return e.code; }).join("");
 document.title = CONFIG.couple.groom.first + " & " + CONFIG.couple.bride.first +
                  " — " + SIDE.label + (GUEST ? " · " + GUEST : "");
