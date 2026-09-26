@@ -869,6 +869,7 @@ var CONFIG = {
       hosts:"Shri Ashok Yadav & Smt. Nisha Yadav",
       askLine:"request the pleasure of your company at the wedding of their son",
       relA:"The groom", relB:"The bride",
+      signoff:["Smt. Nisha Yadav & Shri Ashok Yadav", "Smt Apoorva & Shri Ayush Yadav"],
       events: [
         ENGAGEMENT,
         { code:"h", name:"Haldi & Mehendi", start:"2026-12-06T12:00:00+05:30", at:"groomHome" },
@@ -883,6 +884,7 @@ var CONFIG = {
       hosts:"Ar. Vijay Yadav & Smt. Nirmala Yadav",
       askLine:"request the pleasure of your company at the wedding of their daughter",
       relA:"The bride", relB:"The groom",
+      signoff:["Smt. Nirmala Yadav & Ar. Vijay Yadav", "Smt. Varsha Yadav & Ar. Gaurav Yadav"],
       events: [
         { code:"m", name:"Mehendi",    start:"2026-12-04T17:00:00+05:30", at:"brideHome" },
         ENGAGEMENT,
@@ -971,7 +973,7 @@ $("#greetName").textContent = GUEST || "Respected Guest";
 $("#addressee").textContent = GUEST ? "For " + GUEST : "For you and your family";
 $("#envNames").textContent = CONFIG.couple.groom.first + " & " + CONFIG.couple.bride.first;
 $("#hostLabelFoot").textContent = SIDE.label;
-$("#footFam").innerHTML = "With love,<br>The Yadav Families";
+$("#footFam").innerHTML = "With love,<br>" + SIDE.signoff.map(esc).join("<br>");
 $("#evDebug").textContent = "events: " + EVENTS.map(function(e){ return e.code; }).join("");
 document.title = CONFIG.couple.groom.first + " & " + CONFIG.couple.bride.first +
                  " — " + SIDE.label + (GUEST ? " · " + GUEST : "");
