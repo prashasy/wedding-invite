@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Prashasy & Garima — Wedding Video Invitation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Cinzel:wght@400;500;600&family=Jost:wght@200;300;400;500&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
+<style>
+:root{
+  --parchment:#F7EFE3; --gold:#B98A32; --gold-soft:#EBD49F; --gold-bright:#F4DFA6;
+  --accent:#65101F; --accent-2:#8E1F33; --on-dark:#F6EDDD;
+  --marigold:#F5A623; --marigold-2:#E8730C; --leaf:#3f6b3a;
+  --f-display:'Prata',Georgia,serif; --f-label:'Cinzel',Georgia,serif;
+  --f-body:'Jost',system-ui,sans-serif; --f-hi:'Tiro Devanagari Hindi',serif;
+  --ease:cubic-bezier(.22,.61,.36,1); --pop:cubic-bezier(.34,1.56,.64,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;background:#0b0305;overflow:hidden}
+body{display:grid;place-items:center;font-family:var(--f-body)}
+
+/* ---- the 9:16 stage, scaled to fit the window ---- */
+#wrap{position:relative}
+#stage{
+  position:relative;width:1080px;height:1920px;overflow:hidden;transform-origin:top left;
+  background:
+    radial-gradient(120% 80% at 50% 12%, #4a0d1a 0%, #2c0710 45%, #180307 78%, #0b0305 100%);
+  color:var(--on-dark);
+}
+
+/* ---- decorative background layers ---- */
+.bglayer{position:absolute;inset:0;pointer-events:none}
+.mandala{position:absolute;left:50%;top:50%;width:1500px;height:1500px;margin:-750px 0 0 -750px;
+  opacity:.10;animation:spin 60s linear infinite}
+.mandala.rev{animation:spin 90s linear infinite reverse;opacity:.06;width:1900px;height:1900px;margin:-950px 0 0 -950px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.vignette{position:absolute;inset:0;box-shadow:inset 0 0 340px 90px rgba(0,0,0,.72)}
+.glow{position:absolute;left:50%;top:34%;width:900px;height:900px;margin-left:-450px;transform:translateY(-50%);
+  background:radial-gradient(closest-side, rgba(245,166,35,.16), rgba(245,166,35,0) 70%);pointer-events:none}
+
+/* corner marigold garlands */
+.garland{position:absolute;top:-40px;width:520px;height:360px;opacity:.95}
+.garland.l{left:-70px;transform:scaleX(-1)}
+.garland.r{right:-70px}
+
+/* falling petals + sparkles get injected by JS into these */
+#petals,#sparks{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.petal{position:absolute;top:-60px;border-radius:60% 40% 55% 45%;
+  background:radial-gradient(circle at 35% 30%, var(--marigold), var(--marigold-2) 75%);
+  box-shadow:0 0 6px rgba(232,115,12,.5);will-change:transform,opacity;opacity:.9}
+.spark{position:absolute;border-radius:50%;background:var(--gold-bright);
+  box-shadow:0 0 8px 2px rgba(244,223,166,.8);opacity:0;will-change:transform,opacity}
+
+/* ---- scenes ---- */
+.scene{position:absolute;inset:0;display:grid;align-content:center;justify-items:center;
+  text-align:center;padding:0 96px;opacity:0;visibility:hidden;transition:opacity .8s ease, visibility .8s}
+.scene.on{opacity:1;visibility:visible}
+
+/* generic staggered reveal for children */
+.up,.zoom,.fromL,.fromR,.drop,.grow{opacity:0;transition:all 1s var(--ease);transition-delay:var(--d,0s)}
+.up{transform:translateY(46px)}
+.zoom{transform:scale(.8)}
+.fromL{transform:translateX(-120px)}
+.fromR{transform:translateX(120px)}
+.drop{transform:translateY(-60px)}
+.grow{transform:scale(.2);transform-origin:center}
+.scene.on .up,.scene.on .zoom,.scene.on .fromL,.scene.on .fromR,.scene.on .drop{opacity:1;transform:none}
+.scene.on .grow{opacity:1;transform:scale(1);transition:transform 1s var(--pop),opacity .7s ease;transition-delay:var(--d,0s)}
+
+/* typography helpers */
+.hi{font-family:var(--f-hi);color:var(--gold-soft)}
+.label{font-family:var(--f-label);letter-spacing:.42em;text-transform:uppercase;color:var(--gold-soft);font-weight:600}
+.serif{font-family:var(--f-display)}
+.goldtext{background:linear-gradient(180deg,#fbe7bd 0%,var(--gold-soft) 35%,var(--gold) 70%,#8a6220 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.thin{font-weight:200;color:#f0e2ce}
+
+/* small gold ornament divider */
+.orn{width:280px;height:22px;fill:none;stroke:var(--gold-soft);stroke-width:2}
+
+/* ===== Scene 1 — invocation ===== */
+#s1 .om{width:170px;height:170px;margin-bottom:26px;border:2.5px solid var(--gold-soft);
+  border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 26px rgba(235,212,159,.22)}
+#s1 .om .gsvg{width:112px;height:116px}
+.gsvg{overflow:visible;color:var(--gold-soft);fill:currentColor}
+#s1 .sanskrit{font-size:52px;margin:8px 0 22px}
+#s1 .bless{font-family:var(--f-display);font-size:44px;line-height:1.5;color:#f4e8d4;max-width:820px}
+
+/* ===== Scene 2 — couple ===== */
+#s2 .fig{position:absolute;bottom:250px;filter:drop-shadow(0 24px 34px rgba(0,0,0,.55))}
+#s2 .fig--g{left:40px;height:985px}
+#s2 .fig--b{right:40px;height:825px}
+#s2 .namewrap{position:absolute;left:0;right:0;top:150px}
+#s2 .kicker{font-size:30px;margin-bottom:14px}
+#s2 .names{font-family:var(--f-display);font-size:150px;line-height:1.02}
+#s2 .amp{display:block;font-size:76px;margin:2px 0}
+#s2 .sub{font-family:var(--f-display);font-size:46px;color:#f2e6d2;margin-top:22px}
+#s2 .tag{position:absolute;left:0;right:0;bottom:120px;font-family:var(--f-display);
+  letter-spacing:.02em;font-size:46px;color:var(--gold-soft)}
+#s2 .om2{position:absolute;left:50%;top:965px;width:224px;height:224px;margin-left:-112px;z-index:3;
+  border:3px solid var(--gold-soft);border-radius:50%;display:grid;place-items:center;
+  background:radial-gradient(circle at 42% 36%, rgba(74,13,26,.55), rgba(24,3,7,.35));
+  animation:omglow 3s ease-in-out infinite}
+#s2 .om2 .gsvg{width:150px;height:156px}
+@keyframes omglow{
+  0%,100%{box-shadow:inset 0 0 26px rgba(235,212,159,.2),0 0 14px rgba(235,212,159,.3)}
+  50%{box-shadow:inset 0 0 30px rgba(235,212,159,.3),0 0 30px rgba(244,223,166,.6)}}
+
+/* ===== Scene 3 — the ask ===== */
+#s3 .diya{width:150px;height:170px;margin-bottom:30px}
+#s3 .ask{font-family:var(--f-display);font-size:60px;line-height:1.42;color:#f5ead6;max-width:860px}
+#s3 .ask em{color:var(--gold-soft);font-style:normal}
+
+/* ===== Scene 4 — date & venue ===== */
+#s4 .std{font-size:34px;margin-bottom:26px}
+#s4 .day{font-family:var(--f-label);font-size:44px;letter-spacing:.3em;color:#f0e2ce;font-weight:500}
+#s4 .big{font-family:var(--f-display);font-size:150px;line-height:1;margin:10px 0 10px;white-space:nowrap}
+#s4 .big .sep{color:var(--gold);font-size:96px;vertical-align:middle;margin:0 6px}
+#s4 .time{font-family:var(--f-display);font-size:64px;color:#f5ead6}
+#s4 .venue{margin-top:44px;font-family:var(--f-display);font-size:56px;color:var(--gold-soft)}
+#s4 .addr{font-size:34px;color:#e6d6bf;margin-top:12px;line-height:1.45;font-weight:300}
+#s4 .diyarow{display:flex;gap:60px;margin-top:52px}
+#s4 .diyarow svg{width:96px;height:110px}
+
+/* ===== Scene 5 — families ===== */
+#s5 .heading{font-family:var(--f-display);font-size:56px;color:#f5ead6;margin-bottom:12px}
+#s5 .subhead{font-size:30px;margin-bottom:60px}
+#s5 .cols{display:grid;grid-template-columns:1fr 1fr;gap:40px;width:100%;max-width:900px}
+#s5 .fam{display:grid;gap:18px;align-content:start}
+#s5 .famttl{font-family:var(--f-label);letter-spacing:.2em;font-size:34px;color:var(--gold-soft);
+  font-weight:600;padding-bottom:16px;border-bottom:1px solid rgba(235,212,159,.35);margin-bottom:8px}
+#s5 .nm{font-family:var(--f-display);font-size:40px;line-height:1.35;color:#f2e6d2}
+#s5 .divi{width:2px;background:linear-gradient(180deg,transparent,rgba(235,212,159,.5),transparent);
+  position:absolute;top:0;bottom:0;left:50%}
+
+/* ===== Scene 6 — close ===== */
+#s6 .figsmall{display:flex;justify-content:center;align-items:flex-end;gap:10px;margin-bottom:20px}
+#s6 .figsmall img{filter:drop-shadow(0 18px 24px rgba(0,0,0,.5))}
+#s6 .figsmall img:first-child{height:465px}
+#s6 .figsmall img:last-child{height:390px}
+#s6 .withlove{font-family:var(--f-display);font-size:52px;color:#f5ead6;margin-bottom:10px}
+#s6 .cant{font-family:var(--f-display);font-size:44px;color:#f0e2ce;max-width:820px;line-height:1.4;margin-bottom:34px}
+#s6 .hash{font-family:var(--f-display);text-transform:none;letter-spacing:.02em;font-size:62px}
+#s6 .save{margin-top:26px;font-family:var(--f-label);letter-spacing:.5em;font-size:30px;color:var(--gold-soft)}
+
+/* heartbeat / shimmer accents */
+.pulse{animation:pulse 2.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.flick{transform-origin:50% 100%;animation:flick 1.4s ease-in-out infinite}
+@keyframes flick{0%,100%{transform:scale(1) rotate(-1.5deg);opacity:1}50%{transform:scale(1.08,1.12) rotate(1.5deg);opacity:.92}}
+.float{animation:floaty 5s ease-in-out infinite}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+
+/* ---- start overlay (needed so the song can play) ---- */
+#start{position:absolute;inset:0;z-index:60;display:grid;place-items:center;cursor:pointer;
+  background:radial-gradient(120% 80% at 50% 12%, #4a0d1a 0%, #2c0710 55%, #0b0305 100%)}
+#start .card{text-align:center;transform:translateY(-10px)}
+#start .card svg{width:120px;height:120px;margin-bottom:26px}
+#start h2{font-family:var(--f-display);font-size:78px;color:transparent;margin-bottom:18px}
+#start p{font-family:var(--f-label);letter-spacing:.34em;text-transform:uppercase;font-size:30px;color:var(--gold-soft)}
+#start .pill{margin-top:44px;display:inline-flex;align-items:center;gap:16px;
+  border:1px solid var(--gold-soft);border-radius:60px;padding:22px 44px;
+  font-family:var(--f-label);letter-spacing:.2em;font-size:30px;color:var(--gold-soft);
+  animation:breathe 2.4s ease-in-out infinite}
+@keyframes breathe{0%,100%{box-shadow:0 0 0 0 rgba(235,212,159,.35)}50%{box-shadow:0 0 0 14px rgba(235,212,159,0)}}
+#start.hide{opacity:0;visibility:hidden;transition:opacity .8s ease,visibility .8s}
+</style>
+</head>
+<body>
+<div id="wrap">
+<div id="stage">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="gan" viewBox="0 0 302.68 375.01"><g transform="translate(-72.384 -3.3092)"><g transform="matrix(.24970 0 0 .24970 186.32 67.369)"><path d="m-254.29-64.781c87.76 5.794 177.72-27.495 258.71 59.247-45.771 1.8678-76.86-35.413-138.71 9.3247 20.42 177.47 47.678 126.49 114.29 220-199.17-12.6-135.24-255.77-234.29-288.57z"/><path d="m630.13-59.066c-87.759 14.03-177.71-16.743-267.28 39.247 49.092 9.7746 98.183-8.9371 147.28 29.325-35.93 178.96-48.53 139.34-114.28 220 199.17-12.6 135.24-255.78 234.28-288.58z"/><path d="m17.143-81.924c3.3708-3.3676 277.56-37.714 331.43 60-109.52-34.337-219.05-27.157-328.57-8.571-8.782-16.431-10.496-33.505-2.857-51.429z"/><path d="m41.737-154.36c8.6614 0.77895 218.44 3.2334 281.74 72.264-109.53-34.334-169.36-39.424-278.89-20.834-20.251-17.143-9.9549-34.286-2.8571-51.429z"/><path d="m168.86-256.55c39.903 30.576 60.816 63.219 61.68 99.725h-117.14c4.319-38.701 8.815-62.507 55.463-99.725z"/><path d="m29.473 26.657 101.96 95.454h-85.714l8.9607-58.225z"/><path d="m150.79-25.874h16.608c2.9493 21.218 5.8986 41.35 8.848 43.418 4.6261 3.2436 9.2522-22.865 13.878-43.418h13.985v57.625c-11.111 11.722-20.392 26.496-53.319 1.8589z"/><path d="m108.39 244.35c-16.271 88.385-25.843 179.09 42.575 249.91 72.832 29.791 145.66 17.294 218.5-11.987 62.797-31.579 125.23-50.86 178.9-32.268 2.8587 10.828 7.2511 21.655-3.0878 32.483-76.22-9.6283-125.18 23.289-184.49 47.48-84.343 40.763-168.69 42.139-253.03 0.99212-61.528-47.64-81.751-133.94-56.767-219.55-22.734 4.6686-68.133 16.341-96.279 10.388 23-33.919 99.936-100.26 153.67-77.438z"/><path d="m322.71 244.15c10.691 18.756 15.391 37.513 8.9992 56.269l-21.932 19.425c4.5169 37.936 27.89 49.916 59.87 62.495l208.83-0.61773 22.259 13.626c22.781 1.5712 45.793 3.6053 66.743 1.5141 12.193 9.128 9.502 18.256 6.846 27.384-9.0566 12.434-19.902 14.133-30.822 15.385 0.0541 14.41-8.5598 24.485-23.716 31.29-7.5861 4.3378-13.348 1.3795-19.074-1.7226-2.956-14.795-5.9153-29.59-7.0151-44.384l-220.45 1.8701c-56.015-17.413-101.83-43.61-136-84.051-46.018-71.666 32.661-126.45 85.458-98.482z"/><path d="m-155.13 292.81c52.052-1.3064 63.322 17.571 76.502 42.433 11.404 21.511 6.7917 35.136-3.8505 56.414 14.351-9.9091 39.326-6.7507 48.715 6.1248 15.069 27.173 11.413 70.302-8.5641 105.45-26.2 30.778-60.378 35.842-78.6 31.581 4.4578-18.384 51.338-48.058 32.915-88.706-14.366 19.556-29.345 26.82-43.097 26.45-9.1871-3.5063-10.318-10.465-8.095-18.861 13.756-16.785 26.73-45.324 20.379-68.178-5.3048-19.088-24.394-43.089-43.963-39.998-19.219 3.036-25.376 31.555-28.965 50.678-6.0977 32.491 2.2491 65.392 14.645 98.088 8.7352 23.967 57.229 41.622 44.748 64.676-7.2443 13.381-33.006 4.7026-45.631-1.2274-77.339-47.928-122.54-255.53 22.863-264.93z"/><path d="m412.42 264.35c9.0012-7.407 18.002-3.739 27.004 0-1.4019 75.519-10.106 81.011-68.736 95.74 13.911-22.941 27.822-53.19 41.733-95.74z"/><path d="m672.3 571.93c-17.53 9.7734-26.096 5.2038-34.31 0.0723-15.78-18.991-18.491-40.267-52.921-43.273-33.563-0.89058-48.589 13.28-59.816 30.538l74.117 2.2202c2.4741 9.2124 11.467 12.721-0.0375 34.164l-132.9 0.10745c-6.2426-41.204 42.466-81.505 104.01-119.41 40.652 16.48 93.85 64.296 101.86 95.585z"/><path d="m-412.24 608.92c63.69-62.727 159.48-71.742 252.45-33.281 73.196 25.749 101.81 47.666 133.36 86.201l-157.86-47.9c-57.56-18.105-138.7 18.628-173.92 53.668-31.091 39.296-17.2 130.36 78.587 218.98 46.838 29.138 99.118 39.156 212.81 54.368l212.16 4.4858c72.432 9.0774 82.488 42.412 97.039 73.999-22.456-15.602-33.874-37.09-91.283-34.051l-222.06 11.15c-81.09-4.62-162.17-7.22-243.26-51.92-182.8-98.47-157.72-268-98.03-335.71z"/><path d="m216.72 596.51c12.579-3.4091 24.5-4.5051 41.425-14.535 9.2542 21.905 11.237 37.33 0.92259 51.9-68.98 67.01-157.57 115.58-239.84 129.45 55.172-47.19 128.96-81.02 197.49-166.82z"/><path d="m163.9 776.87c0 16.05-14.312 29.06-31.966 29.06-17.655 0-31.966-13.011-31.966-29.06 0-16.05 14.312-29.06 31.966-29.06 17.655 0 31.966 13.011 31.966 29.06z"/><path d="m16.274 788.49c88.966 38.04 147.9 31.04 252.25-12.78-81.91 92.22-261.68 97.39-252.25 12.78z"/><path d="m362.67 759.43c54.812-77.496 110.07-133.48 188.66-147.69 111.82-20.227 210.95 60.725 204.23 161.64-7.5364 113.2-62.378 211.61-137.17 295.25-35.776 40.012-101.85 53.129-137.85 63.483 27.515-31.272 63.483-31.171 101.99-89.923 39.04-80.32 107.18-182.44 102.88-249.11-9.64-100.18-69.81-126.08-124.31-109.86-62.726 18.671-116.5 74.312-148.96 117.51-46.269 77.574-76.585 232.6-60.721 265.47 28.879 32.547 70.191 23.687 99.599 25.671-29.521 26.551-111.58 47.297-137.56 9.3859-58.327-85.105-0.71171-256.24 49.216-341.84z"/><path d="m-55.796 1010.5c193.47 37.661 208.1 107.99 234.81 181.34-71.898-50.474-112.58-119.68-239.46-137.16-35.63-15.499-19.134-44.091 4.6497-44.172z"/><path d="m237.13 1115.1 34.119-43.18c34.002 13.845 31 24.357 20.818 43.112l-17.74 16.341 1.2792 65.733 150.19-3.8417c32.746 18.771 23.676 35.723-0.35327 52.025l-202.26-4.6496c-24.691-46.038-3.2668-85.489 13.949-125.54z"/><path d="m310.64 26.657-101.96 95.454h85.714l-8.9607-58.225z"/></g></g></symbol></svg>
+
+  <!-- background -->
+  <div class="bglayer">
+    <svg class="mandala" viewBox="0 0 200 200" aria-hidden="true"><g fill="none" stroke="#EBD49F" stroke-width="1">
+      <circle cx="100" cy="100" r="94"/><circle cx="100" cy="100" r="78" stroke-dasharray="3 5"/>
+      <circle cx="100" cy="100" r="60"/><circle cx="100" cy="100" r="40" stroke-dasharray="2 4"/>
+      <g id="pet"></g></g></svg>
+    <svg class="mandala rev" viewBox="0 0 200 200" aria-hidden="true"><g fill="none" stroke="#EBD49F" stroke-width="1">
+      <circle cx="100" cy="100" r="96" stroke-dasharray="1 6"/><circle cx="100" cy="100" r="70"/></g></svg>
+    <div class="glow"></div>
+    <div class="vignette"></div>
+  </div>
+  <div id="petals"></div>
+  <div id="sparks"></div>
+
+  <!-- Scene 1 : invocation -->
+  <section class="scene" id="s1">
+    <div class="om drop" style="--d:.1s">
+      <svg class="gsvg" viewBox="0 0 303 375" aria-hidden="true"><use href="#gan"/></svg>
+    </div>
+    <div class="hi sanskrit up" style="--d:.35s">॥ ॐ श्री गणेशाय नमः ॥</div>
+    <svg class="orn up" style="--d:.6s" viewBox="0 0 100 14"><path d="M0 7h34M66 7h34"/>
+      <path d="M50 1.5c3 2.2 4.5 4 4.5 5.5S53 10.8 50 12.5C47 10.8 45.5 9 45.5 7S47 3.7 50 1.5z"/></svg>
+    <p class="bless up" style="--d:.9s">With the blessings of the Almighty<br>and our elders</p>
+  </section>
+
+  <!-- Scene 2 : couple -->
+  <section class="scene" id="s2">
+    <div class="namewrap">
+      <div class="kicker label up" style="--d:.15s">Together forever</div>
+      <div class="names serif">
+        <span class="fromL goldtext" style="--d:.35s">Prashasy</span>
+        <span class="amp goldtext zoom" style="--d:.7s">&amp;</span>
+        <span class="fromR goldtext" style="--d:.35s">Garima</span>
+      </div>
+      <div class="sub up" style="--d:1s">are getting married</div>
+    </div>
+    <img class="fig fig--g fromL float" style="--d:.5s" src="characters/groom.png" alt="">
+    <img class="fig fig--b fromR float" style="--d:.5s" src="characters/bride.png" alt="">
+    <div class="om2 grow" style="--d:1.15s">
+      <svg class="gsvg" viewBox="0 0 303 375" aria-hidden="true"><use href="#gan"/></svg>
+    </div>
+    <div class="tag up" style="--d:1.45s">#PrashasyKiGarima</div>
+  </section>
+
+  <!-- Scene 3 : the ask -->
+  <section class="scene" id="s3">
+    <svg class="diya grow pulse" style="--d:.1s" viewBox="0 0 100 110">
+      <path class="flick" d="M50 8c7 10 12 17 12 26a12 12 0 0 1-24 0c0-7 4-13 12-26z" fill="#F5A623"/>
+      <path class="flick" d="M50 20c3 5 6 9 6 14a6 6 0 0 1-12 0c0-4 2-7 6-14z" fill="#FFF1C2"/>
+      <path d="M14 74c6 12 66 12 72 0 3-5-9-10-36-10s-39 5-36 10z" fill="#8E1F33"/>
+      <path d="M14 74c6 12 66 12 72 0" fill="none" stroke="#EBD49F" stroke-width="2"/>
+    </svg>
+    <p class="ask serif up" style="--d:.4s">We request the pleasure<br>of your company<br>at the <em>wedding</em> of our children</p>
+  </section>
+
+  <!-- Scene 4 : date & venue -->
+  <section class="scene" id="s4">
+    <div class="std label up" style="--d:.1s">Save the Date</div>
+    <div class="day drop" style="--d:.3s">Monday</div>
+    <div class="big serif goldtext grow" style="--d:.5s">07<span class="sep">·</span>12<span class="sep">·</span>2026</div>
+    <div class="time serif up" style="--d:.9s">7:00 PM</div>
+    <div class="venue serif up" style="--d:1.1s">Ramada, Lucknow</div>
+    <div class="addr up" style="--d:1.25s">404, Junabganj · Lucknow–Kanpur Road<br>Lucknow 226401</div>
+    <div class="diyarow">
+      <svg class="up" style="--d:1.4s" viewBox="0 0 100 110"><path class="flick" d="M50 12c6 9 10 15 10 22a10 10 0 0 1-20 0c0-6 4-11 10-22z" fill="#F5A623"/><path d="M16 76c6 11 62 11 68 0 3-5-8-9-34-9s-37 4-34 9z" fill="#8E1F33"/><path d="M16 76c6 11 62 11 68 0" fill="none" stroke="#EBD49F" stroke-width="2"/></svg>
+      <svg class="up" style="--d:1.5s" viewBox="0 0 100 110"><path class="flick" d="M50 12c6 9 10 15 10 22a10 10 0 0 1-20 0c0-6 4-11 10-22z" fill="#F5A623"/><path d="M16 76c6 11 62 11 68 0 3-5-8-9-34-9s-37 4-34 9z" fill="#8E1F33"/><path d="M16 76c6 11 62 11 68 0" fill="none" stroke="#EBD49F" stroke-width="2"/></svg>
+      <svg class="up" style="--d:1.6s" viewBox="0 0 100 110"><path class="flick" d="M50 12c6 9 10 15 10 22a10 10 0 0 1-20 0c0-6 4-11 10-22z" fill="#F5A623"/><path d="M16 76c6 11 62 11 68 0 3-5-8-9-34-9s-37 4-34 9z" fill="#8E1F33"/><path d="M16 76c6 11 62 11 68 0" fill="none" stroke="#EBD49F" stroke-width="2"/></svg>
+    </div>
+  </section>
+
+  <!-- Scene 5 : families -->
+  <section class="scene" id="s5">
+    <div class="heading serif up" style="--d:.1s">With love &amp; blessings</div>
+    <div class="subhead label up" style="--d:.3s">from our families</div>
+    <div class="cols" style="position:relative">
+      <div class="divi"></div>
+      <div class="fam">
+        <div class="famttl drop" style="--d:.5s">Groom's Family</div>
+        <div class="nm fromL" style="--d:.7s">Smt. Nisha<br>&amp; Shri Ashok Yadav</div>
+        <div class="nm fromL" style="--d:.95s">Smt Apoorva<br>&amp; Shri Ayush Yadav</div>
+      </div>
+      <div class="fam">
+        <div class="famttl drop" style="--d:.6s">Bride's Family</div>
+        <div class="nm fromR" style="--d:.8s">Smt. Nirmala<br>&amp; Ar. Vijay Yadav</div>
+        <div class="nm fromR" style="--d:1.05s">Smt. Varsha<br>&amp; Ar. Gaurav Yadav</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scene 6 : close -->
+  <section class="scene" id="s6">
+    <div class="figsmall">
+      <img class="fromL float" style="--d:.2s" src="characters/groom.png" alt="">
+      <img class="fromR float" style="--d:.2s" src="characters/bride.png" alt="">
+    </div>
+    <div class="withlove serif up" style="--d:.5s">We can't wait to celebrate</div>
+    <div class="cant serif up" style="--d:.7s">this joy with you and your family</div>
+    <div class="hash label goldtext grow" style="--d:.95s">#PrashasyKiGarima</div>
+    <svg class="orn up" style="--d:1.2s;margin-top:30px" viewBox="0 0 100 14"><path d="M0 7h34M66 7h34"/>
+      <path d="M50 1.5c3 2.2 4.5 4 4.5 5.5S53 10.8 50 12.5C47 10.8 45.5 9 45.5 7S47 3.7 50 1.5z"/></svg>
+    <div class="save up" style="--d:1.4s">Save the Date · 07.12.2026</div>
+  </section>
+
+  <!-- start overlay -->
+  <div id="start">
+    <div class="card">
+      <svg viewBox="0 0 100 100"><g fill="none" stroke="#EBD49F" stroke-width="2">
+        <circle cx="50" cy="50" r="46"/><circle cx="50" cy="50" r="34" stroke-dasharray="3 5"/>
+        <path d="M42 34l24 16-24 16z" fill="#EBD49F" stroke="none"/></g></svg>
+      <h2 class="goldtext serif">Prashasy &amp; Garima</h2>
+      <p>A wedding invitation</p>
+      <div class="pill">▶ Tap to play</div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<audio id="bgm" src="audio/dil_se_dil.mp3" preload="auto"></audio>
+
+<script>
+/* ---------- fit the 1080x1920 stage into the window ---------- */
+var STAGE_W=1080, STAGE_H=1920, stage=document.getElementById('stage'), wrap=document.getElementById('wrap');
+function fit(){
+  var s=Math.min(window.innerWidth/STAGE_W, window.innerHeight/STAGE_H);
+  stage.style.transform='scale('+s+')';
+  wrap.style.width=(STAGE_W*s)+'px'; wrap.style.height=(STAGE_H*s)+'px';
+}
+window.addEventListener('resize',fit); fit();
+
+/* ---------- draw mandala lotus petals ---------- */
+(function(){var g=document.getElementById('pet'),h='';for(var i=0;i<24;i++){var a=i*15;
+  h+='<ellipse cx="100" cy="22" rx="6" ry="16" transform="rotate('+a+' 100 100)"/>';}g.innerHTML=h;})();
+
+
+/* ---------- floating marigold petals ---------- */
+(function(){var box=document.getElementById('petals'),h='';for(var i=0;i<34;i++){
+  var sz=(14+Math.random()*22)|0, left=Math.random()*100, dur=7+Math.random()*7, del=-Math.random()*14,
+      sway=(18+Math.random()*30)|0, rot=(Math.random()*360)|0;
+  h+='<div class="petal" style="left:'+left+'%;width:'+sz+'px;height:'+(sz*0.8)+'px;'+
+     'animation:fall '+dur+'s linear '+del+'s infinite;--sway:'+sway+'px;--rot:'+rot+'deg"></div>';
+}box.innerHTML=h;})();
+/* ---------- twinkling gold sparks ---------- */
+(function(){var box=document.getElementById('sparks'),h='';for(var i=0;i<26;i++){
+  var sz=(2+Math.random()*4)|0,left=Math.random()*100,top=Math.random()*100,dur=2+Math.random()*3,del=-Math.random()*5;
+  h+='<div class="spark" style="left:'+left+'%;top:'+top+'%;width:'+sz+'px;height:'+sz+'px;'+
+     'animation:tw '+dur+'s ease-in-out '+del+'s infinite"></div>';
+}box.innerHTML=h;})();
+
+/* petal + spark keyframes (injected so we can use css vars) */
+var st=document.createElement('style');
+st.textContent='@keyframes fall{0%{transform:translate(0,-60px) rotate(0)}'+
+  '100%{transform:translate(var(--sway),2040px) rotate(calc(var(--rot) + 540deg))}}'+
+  '@keyframes tw{0%,100%{opacity:0;transform:scale(.4)}50%{opacity:1;transform:scale(1)}}';
+document.head.appendChild(st);
+
+/* ---------- the timeline ---------- */
+/* [sceneId, showAt(ms), hideAt(ms|null=stay)] */
+var TL=[
+  ['s1',   200,  4000],
+  ['s2',  4200,  9400],
+  ['s3',  9600, 13800],
+  ['s4', 14000, 20200],
+  ['s5', 20400, 27000],
+  ['s6', 27200, null ]
+];
+var TOTAL=31000;
+var timers=[], playing=false;
+
+function play(){
+  if(playing) return; playing=true;
+  var bgm=document.getElementById('bgm');
+  bgm.currentTime=0; bgm.volume=0; bgm.play().catch(function(){});
+  // fade song in, and out near the end
+  var vol=0, fin=setInterval(function(){vol=Math.min(.9,vol+.06); bgm.volume=vol; if(vol>=.9)clearInterval(fin);},60);
+  timers.push(setTimeout(function(){
+    var v=bgm.volume, fo=setInterval(function(){v=Math.max(0,v-.05); bgm.volume=v; if(v<=0){clearInterval(fo);bgm.pause();}},70);
+  }, TOTAL-1800));
+
+  TL.forEach(function(row){
+    timers.push(setTimeout(function(){ document.getElementById(row[0]).classList.add('on'); }, row[1]));
+    if(row[2]!==null) timers.push(setTimeout(function(){ document.getElementById(row[0]).classList.remove('on'); }, row[2]));
+  });
+}
+
+/* expose a deterministic seek for frame-by-frame rendering (no audio) */
+window.seek=function(ms){
+  TL.forEach(function(row){
+    var on = ms>=row[1] && (row[2]===null || ms<row[2]);
+    document.getElementById(row[0]).classList.toggle('on', on);
+  });
+};
+window.TOTAL=TOTAL;
+
+var start=document.getElementById('start');
+start.addEventListener('click',function(){ start.classList.add('hide'); play(); });
+
+/* autostart when opened with ?auto=1 (used by the recorder) */
+if(location.search.indexOf('auto=1')>-1){ start.classList.add('hide'); play(); }
+</script>
+</body>
+</html>

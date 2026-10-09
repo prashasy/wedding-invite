@@ -415,7 +415,7 @@ main{position:relative;z-index:2}
 .hang__row::-webkit-scrollbar{display:none}
 @media(min-width:860px){.hang__row{overflow:visible;flex-wrap:wrap;justify-content:center}}
 .pic{flex:0 0 auto;width:clamp(190px,58vw,250px);scroll-snap-align:center;
-  background:var(--parchment);padding:11px 11px 44px;border-radius:2px;
+  background:var(--parchment);padding:11px 11px 62px;border-radius:2px;
   box-shadow:0 20px 44px rgba(0,0,0,.45);position:relative;
   transform-origin:top center;cursor:pointer;border:0;text-align:center;
   opacity:0;transform:translateY(-40px) rotate(0deg);
@@ -428,7 +428,8 @@ main{position:relative;z-index:2}
 .pic::after{content:"";position:absolute;left:50%;top:-25px;width:11px;height:11px;margin-left:-5.5px;
   border-radius:50%;background:var(--gold-soft);box-shadow:0 0 8px rgba(231,206,150,.6)}
 .pic img{width:100%;aspect-ratio:1/1;object-fit:cover;background:var(--parchment-2)}
-.pic__cap{position:absolute;left:0;right:0;bottom:13px;
+.pic__cap{position:absolute;left:0;right:0;bottom:0;height:62px;padding:0 14px;
+  display:flex;align-items:center;justify-content:center;line-height:1.55;
   font-family:var(--f-label);font-weight:600;font-size:12px;letter-spacing:.2em;
   text-transform:uppercase;color:var(--accent)}
 .pic.no-img img{display:none}
@@ -824,20 +825,21 @@ var CONFIG = {
 
   couple: {
     groom: { first:"Prashasy", full:"Prashasy",
-      parents:"Shri Ashok Yadav & Smt. Nisha Yadav",
-      grandparents:"Shri Malkhan Singh Yadav & Smt. Shiv Pyari Yadav" },
+      parents:"Smt. Nisha Yadav & Shri. Ashok Yadav",
+      grandparents:"Smt. Shiv Pyari Yadav & Shri. Malkhan Singh Yadav" },
     bride: { first:"Garima", full:"Garima",
-      parents:"Ar. Vijay Yadav & Smt. Nirmala Yadav",
-      grandparents:"Shri Surya Bali Yadav & Smt. Somari Yadav" }
+      parents:"Smt. Nirmala Yadav & Ar. Vijay Yadav",
+      grandparents:"Smt. Somari Yadav & Shri. Surya Bali Yadav" }
   },
 
   gallery: [
     { photo:"photos/us-01.jpg", cap:"Our first meeting" },
-    { photo:"photos/us-02.jpg", cap:"Roka Ceremony" },
-    { photo:"photos/us-03.jpg", cap:"Both families" },
-    { photo:"photos/us-04.jpg", cap:"Grah Pravesh" },
-    { photo:"photos/us-05.jpg", cap:"Ring shopping" },
-    { photo:"photos/us-06.jpg", cap:"Baraksha Ceremony" }
+    { photo:"photos/us-02.jpg", cap:"Roka: Officially off the market!" },
+    { photo:"photos/us-06.jpg", cap:"Baraksha: Groom Reserved!" },
+    { photo:"photos/us-03.jpg", cap:"Ultimate Family Collab" },
+    { photo:"photos/us-04.jpg", cap:"Home Sweet Home" },
+    { photo:"photos/us-05.jpg", cap:"Ring Shopping: Added to cart for Life" },
+    { photo:"photos/us-07.jpg", cap:"Ghoomi Ghoomi" },
   ],
 
   places: {
@@ -866,10 +868,10 @@ var CONFIG = {
   sides: {
     groom: {
       label:"Groom's side",
-      hosts:"Shri Ashok Yadav & Smt. Nisha Yadav",
+      hosts:"Smt. Nisha Yadav & Shri. Ashok Yadav",
       askLine:"request the pleasure of your company at the wedding of their son",
       relA:"The groom", relB:"The bride",
-      signoff:["Smt. Nisha Yadav & Shri Ashok Yadav", "Smt Apoorva & Shri Ayush Yadav"],
+      signoff:["Smt. Nisha & Shri. Ashok Yadav", "Smt. Apoorva & Shri. Ayush Yadav"],
       events: [
         ENGAGEMENT,
         { code:"h", name:"Haldi & Mehendi", start:"2026-12-06T12:00:00+05:30", at:"groomHome" },
@@ -881,7 +883,7 @@ var CONFIG = {
     },
     bride: {
       label:"Bride's side",
-      hosts:"Ar. Vijay Yadav & Smt. Nirmala Yadav",
+      hosts:"Smt. Nirmala Yadav & Ar. Vijay Yadav",
       askLine:"request the pleasure of your company at the wedding of their daughter",
       relA:"The bride", relB:"The groom",
       signoff:["Smt. Nirmala Yadav & Ar. Vijay Yadav", "Smt. Varsha Yadav & Ar. Gaurav Yadav"],
