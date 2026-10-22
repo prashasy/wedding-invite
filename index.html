@@ -11,9 +11,15 @@
 
 <meta name="theme-color" content="#150A0E">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Prashasy &amp; Garima are getting married">
-<meta property="og:description" content="Tap to open your invitation.">
-<meta property="og:image" content="photos/og-cover.jpg">
+<meta property="og:url" content="https://prashasy-garima.netlify.app/">
+<meta property="og:title" content="Prashasy &amp; Garima — Wedding on 7th December">
+<meta property="og:description" content="We request your blessings.">
+<meta property="og:image" content="https://prashasy-garima.netlify.app/photos/og-cover.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="description" content="Prashasy &amp; Garima — Wedding on 7th December. We request your blessings.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -682,7 +688,7 @@ body.no-motion .timeline.is-in::before{height:calc(100% - 12px)}
   </section>
 
   <!-- 2 -->
-  <section class="chapter chapter--dark" data-bead="Us, so far">
+  <section class="chapter chapter--dark" data-bead="Us, so far" id="gallery">
     <div class="wrap wrap--wide">
       <div class="cue cue--right" data-char="bride" data-say="Humari kahaani, thodi si 💫"></div>
       <div class="center">
@@ -798,6 +804,7 @@ body.no-motion .timeline.is-in::before{height:calc(100% - 12px)}
      host  groom | bride     — which side's invitation to show
      to    guest name        — printed on the cover and the card
      ev    which events       — see below. Leave it out and they get everything.
+     g     g=0 hides the photo gallery ("Us, so far")
 
    EVENT CODES (one letter each, listed per side under sides.*.events)
      bride:  m Mehendi   e Engagement   h Haldi   s Shaadi
@@ -817,7 +824,7 @@ var SHAADI = { code:"s", name:"Shaadi", start:"2026-12-07T19:00:00+05:30", at:"r
 
 var CONFIG = {
 
-  hashtag: "#PrashasyKiGarima",      // ← wax seal + footer. Stacks itself across lines to fit.
+  hashtag: { groom:"#PrashasyKiGarima", bride:"#GarimaKePrashasy" },  // ← per host; wax seal + footer. Stacks itself across lines to fit.
   defaultHost: "groom",
   music: "audio/dil_se_dil.mp3",                         // e.g. "audio/shehnai.mp3" — "" hides the music button
 
@@ -963,12 +970,13 @@ function eventsAt(k){
 (function(){
   /* "#PrashasyKiGarima" is too long for one line in a wax seal, so split it
      on the capitals and stack the parts. Short text stays on a single line. */
-  var parts = String(CONFIG.hashtag).replace(/([a-z0-9])([A-Z])/g, "$1 $2").split(/\s+/).filter(Boolean);
+  var tag = String(CONFIG.hashtag[HOST]);
+  var parts = tag.replace(/([a-z0-9])([A-Z])/g, "$1 $2").split(/\s+/).filter(Boolean);
   var html = parts.map(function(w){ return "<span>" + esc(w) + "</span>"; }).join("");
   [["#sealBtn", "seal--long"], ["#footSeal", "seal--long"]].forEach(function(x){
     var el = $(x[0]);
     el.innerHTML = html;
-    if (parts.length > 1 || CONFIG.hashtag.length > 9) el.classList.add(x[1]);
+    if (parts.length > 1 || tag.length > 9) el.classList.add(x[1]);
   });
 })();
 $("#greetName").textContent = GUEST || "Respected Guest";
@@ -1035,8 +1043,9 @@ $$(".cue").forEach(function(c){
                 '<p class="cue__bubble">' + words + '</p>';
 });
 
-/* ---------- gallery ---------- */
-(function(){
+/* ---------- gallery (?g=0 removes it, and its rail bead with it) ---------- */
+if (q.get("g") === "0") $("#gallery").remove();
+else (function(){
   var tilts = [-3.2, 2.4, -1.8, 3.1, -2.6, 1.9];
   $("#hangRow").innerHTML = CONFIG.gallery.map(function(g,i){
     return '<button class="pic" type="button" data-i="' + i + '" style="--tilt:' +
